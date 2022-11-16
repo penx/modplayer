@@ -10,8 +10,9 @@
     "jest": "jest --verbose --coverage --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build": "npm run build:ecm && npm run build:commonjs",
-    "build:ecm": "tsc -p tsconfig.prod.json",
+    "build": "npm run build:esm && npm run build:commonjs",
+    "build:esm": "tsc -p tsconfig.prod.json",
+    "build:esm:watch": "tsc -p tsconfig.prod.json --watch",
     "build:commonjs": "tsc -p tsconfig.commonjs.json",
     "lint": "eslint '**/*.ts'"
   },
