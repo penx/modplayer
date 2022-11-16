@@ -429,8 +429,6 @@ function advance(mod: Protracker) {
             // pattern jump/break?
             mod.position = mod.patternjump;
             mod.row = mod.breakrow;
-            mod.patternjump = 0;
-            mod.breakrow = 0;
             mod.flags &= 0xe1;
             mod.flags |= 2;
           }
@@ -450,7 +448,12 @@ function advance(mod: Protracker) {
   }
   if (mod.position >= mod.songlen) {
     if (mod.repeat) {
-      mod.position = 0;
+      if (mod.breakrow || mod.patternjump) {
+        mod.position = mod.patternjump;
+        mod.row = mod.breakrow;
+      } else {
+        mod.position = 0;
+      }
     } else {
       mod.endofsong = true;
       //mod.stop();
