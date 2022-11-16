@@ -461,8 +461,8 @@ function advance(mod: Protracker) {
 
 // mix an audio buffer with data
 function mix(mod: Protracker, bufs: Float32Array[], buflen: number) {
-  let f;
-  let p, pp, n, nn;
+  let f: number;
+  let p: number, pp: number, n: number, nn: number;
 
   const outp = new Float32Array(2);
   for (let s = 0; s < buflen; s++) {
