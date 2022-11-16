@@ -1,6 +1,6 @@
 {
   "name": "modplayer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MOD file player/tracker",
   "module": "index.js",
   "main": "cjs/index.js",
