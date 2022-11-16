@@ -1,0 +1,10 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - run: yarn build
+      - run: yarn test

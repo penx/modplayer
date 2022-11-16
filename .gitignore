@@ -1,0 +1,17 @@
+/node_modules
+
+/index.js
+/Protracker.js
+/*.test-d.js
+/*.d.ts
+/cjs
+/coverage
+.DS_Store
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
