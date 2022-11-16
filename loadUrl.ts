@@ -2,7 +2,10 @@ import { Protracker } from "./Protracker";
 
 const supportedformats = ["mod", "s3m", "xm"];
 
-export function loadUrl(url: string, options?: { autoplay?: boolean }) {
+export function loadUrl(
+  url: string,
+  options?: { autoplay?: boolean; repeat?: boolean }
+) {
   let ext = url.split(".").pop()?.toLowerCase().trim();
   if (!ext || supportedformats.indexOf(ext) == -1) {
     // unknown extension, maybe amiga-style prefix?
@@ -38,6 +41,9 @@ export function loadUrl(url: string, options?: { autoplay?: boolean }) {
       createContext(player);
       player.initialize();
       player.flags = 1 + 2;
+      if (options?.repeat) {
+        player.repeat = true;
+      }
       if (options?.autoplay) {
         player.play();
       }
