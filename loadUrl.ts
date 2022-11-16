@@ -4,7 +4,12 @@ const supportedformats = ["mod", "s3m", "xm"];
 
 export function loadUrl(
   url: string,
-  options?: { autoplay?: boolean; repeat?: boolean }
+  options?: {
+    autoplay?: boolean;
+    repeat?: boolean;
+    context?: AudioContext;
+    destination?: AudioNode;
+  }
 ) {
   let ext = url.split(".").pop()?.toLowerCase().trim();
   if (!ext || supportedformats.indexOf(ext) == -1) {
@@ -30,6 +35,10 @@ export function loadUrl(
     default:
       throw new Error(`Unsupported file extension ${ext}`);
   }
+  createContext(player, {
+    context: options?.context,
+    destination: options?.destination,
+  });
 
   const request = new XMLHttpRequest();
   request.open("GET", url, true);
@@ -38,7 +47,6 @@ export function loadUrl(
   request.onload = function () {
     const buffer = new Uint8Array(request.response);
     if (player.parse(buffer)) {
-      createContext(player);
       player.initialize();
       player.flags = 1 + 2;
       if (options?.repeat) {
@@ -56,8 +64,11 @@ export function loadUrl(
   return player;
 }
 
-function createContext(player: Protracker): AudioContext {
-  const context = new AudioContext();
+function createContext(
+  player: Protracker,
+  options?: { context?: AudioContext; destination?: AudioNode }
+): AudioContext {
+  const context = options?.context || new AudioContext();
   const samplerate = context.sampleRate;
   const bufferlen = samplerate > 44100 ? 4096 : 2048;
   const filterNode = context.createBiquadFilter();
@@ -80,7 +91,7 @@ function createContext(player: Protracker): AudioContext {
   };
 
   mixerNode.connect(filterNode);
-  filterNode.connect(context.destination);
+  filterNode.connect(options?.destination || context.destination);
   // lowpassNode.connect(context.destination);
 
   return context;
