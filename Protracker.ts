@@ -42,9 +42,9 @@ export class Protracker {
   }[] = [];
   samples = 0;
   patterns = 0;
-  pattern: any[] = [];
-  note?: any[];
-  pattern_unpack?: any[];
+  pattern: Uint8Array[] = [];
+  note?: Uint8Array[];
+  pattern_unpack?: Uint8Array[];
   looprow = 0;
   loopstart?: number;
   loopcount?: number;
@@ -89,7 +89,7 @@ export class Protracker {
   chvu: Float32Array = new Float32Array(0);
 
   constructor() {
-    let i, t;
+    let t;
 
     this.clearsong();
     this.initialize();

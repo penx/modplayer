@@ -5,4 +5,10 @@ module.exports = {
   parserOptions: { project: ["./tsconfig.json"] },
   plugins: ["@typescript-eslint"],
   ignorePatterns: ["cjs/**/*", "*.d.ts"],
+  rules: {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { vars: "all", args: "none", ignoreRestSiblings: true },
+    ],
+  },
 };
