@@ -1,6 +1,6 @@
 {
   "name": "modplayer",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Amiga MOD player",
   "module": "index.js",
   "main": "cjs/index.js",
