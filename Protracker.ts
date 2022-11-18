@@ -379,8 +379,8 @@ export class Protracker {
     return true;
   }
 
-  mix(bufs: Float32Array[], buflen: number) {
-    return mix(this, bufs, buflen);
+  mix(channels: Float32Array[]) {
+    return mix(this, channels);
   }
   advance() {
     return advance(this);
@@ -463,12 +463,12 @@ function advance(mod: Protracker) {
 }
 
 // mix an audio buffer with data
-function mix(mod: Protracker, bufs: Float32Array[], buflen: number) {
+function mix(mod: Protracker, channels: Float32Array[]) {
   let f: number;
   let p: number, pp: number, n: number, nn: number;
 
   const outp = new Float32Array(2);
-  for (let s = 0; s < buflen; s++) {
+  for (let s = 0; s < channels[0].length; s++) {
     outp[0] = 0.0;
     outp[1] = 0.0;
 
@@ -615,8 +615,8 @@ function mix(mod: Protracker, bufs: Float32Array[], buflen: number) {
     }
 
     // done - store to output buffer
-    bufs[0][s] = outp[0];
-    bufs[1][s] = outp[1];
+    channels[0][s] = outp[0];
+    channels[1][s] = outp[1];
   }
 }
 

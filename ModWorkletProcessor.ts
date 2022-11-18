@@ -21,8 +21,8 @@ export class ModWorkletProcessor
       };
     };
   }) {
-    const { buffer, ext, options } = processorOptions;
     super();
+    const { buffer, ext, options } = processorOptions;
 
     switch (ext) {
       case "mod":
@@ -57,9 +57,8 @@ export class ModWorkletProcessor
     outputs: Float32Array[][],
     parameters: Record<string, Float32Array>
   ) {
-    const bufs = [outputs[0][0], outputs[0][1]];
-    const buflen = outputs[0][0].length;
-    this.player.mix(bufs, buflen);
+    this.player.mix(outputs[0]);
+
     return true;
   }
 }
