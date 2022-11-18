@@ -16,3 +16,6 @@
 !.yarn/sdks
 !.yarn/versions
 /loadUrl.js
+/loadWorkletFromUrl.js
+/ModWorkletNode.js
+/ModWorkletProcessor.js

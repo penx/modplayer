@@ -4,6 +4,30 @@ TypeScript mod player/tracker.
 
 ## Usage
 
+### AudioWorklet
+
+```ts
+// ModWorkletProcessor.ts 
+import { register } from "modplayer/ModWorkletProcessor";
+register();
+```
+
+```ts
+// main.ts
+import ModWorkletProcessor from "./ModWorkletProcessor.ts?url";
+const context = new AudioContext();
+await context.audioWorklet.addModule(ModWorkletProcessor);
+const worklet = await loadWorkletFromUrl("/assets/cooltune.mod", context, {
+  options: {
+    autoplay: true,
+    repeat: true,
+  },
+});
+worklet.connect(analyser).connect(_context.destination);
+```
+
+### ScriptProcessor ([deprecated](https://developer.mozilla.org/en-US/docs/Web/API/ScriptProcessorNode))
+
 ```ts
 import { loadUrl } from "modplayer";
 
@@ -29,4 +53,8 @@ document.getElementById("app").innerHTML = `
 
 Based upon @electronoora's [webaudio-mod-player](https://github.com/electronoora/webaudio-mod-player).
 
-Converted to TypeScript and published to npm by Alasdair McLeay.
+Forked by Alasdair McLeay:
+
+- Converted to TypeScript
+- Published to npm
+- Added AudioWorklet (threading) support

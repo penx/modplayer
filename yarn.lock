@@ -875,6 +875,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/audioworklet@npm:^0.0.35":
+  version: 0.0.35
+  resolution: "@types/audioworklet@npm:0.0.35"
+  checksum: e3b38fc27cab2be86e4cf0d16efaae8d5ad1b016b15e2c9299d53e3150c5e52701d3610f2be665f8bc7a8c456bd3deed9471eb359b076f09ae1dde5f6e8e5445
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.0.0, @types/babel__core@npm:^7.1.14":
   version: 7.1.20
   resolution: "@types/babel__core@npm:7.1.20"
@@ -3699,6 +3706,7 @@ __metadata:
   resolution: "modplayer@workspace:."
   dependencies:
     "@jest/types": ^29.3.1
+    "@types/audioworklet": ^0.0.35
     "@types/jest": ^27.4.1
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0

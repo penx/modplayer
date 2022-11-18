@@ -1,7 +1,7 @@
 {
   "name": "modplayer",
   "version": "0.0.4",
-  "description": "MOD file player/tracker",
+  "description": "Amiga MOD player",
   "module": "index.js",
   "main": "cjs/index.js",
   "types": "index.d.ts",
@@ -26,6 +26,7 @@
     "amiga",
     "music",
     "tracker",
+    "protracker",
     "player"
   ],
   "repository": {
@@ -46,6 +47,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "@types/audioworklet": "^0.0.35",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0"
   }
