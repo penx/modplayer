@@ -7,44 +7,23 @@ TypeScript mod player/tracker.
 ### AudioWorklet
 
 ```ts
-// ModWorkletProcessor.ts 
-import { register } from "modplayer/ModWorkletProcessor";
-register();
-```
+import modplayerWorkletUrl from "modplayer/worklet?worker&url";
+import { loadWorkletFromBuffer, loadBufferFromUrl } from "modplayer";
 
-```ts
-// main.ts
-import ModWorkletProcessor from "./ModWorkletProcessor.ts?url";
-const context = new AudioContext();
-await context.audioWorklet.addModule(ModWorkletProcessor);
-const worklet = await loadWorkletFromUrl("/assets/cooltune.mod", context, {
-  options: {
+const context = new AudioContext({
+  sampleRate: 44100,
+});
+await context.audioWorklet.addModule(modplayerWorkletUrl);
+const addModulePromise = context.audioWorklet.addModule(modplayerWorkletUrl);
+const { buffer, ext } = await loadBufferFromUrl("/assets/cooltune.mod");
+const worklet = loadWorkletFromBuffer(ext, buffer, context, {
+    options: {
     autoplay: true,
     repeat: true,
   },
 });
-worklet.connect(analyser).connect(_context.destination);
-```
 
-### ScriptProcessor ([deprecated](https://developer.mozilla.org/en-US/docs/Web/API/ScriptProcessorNode))
-
-```ts
-import { loadUrl } from "modplayer";
-
-let player;
-
-window.play = () => {
-  if (!player) {
-    player = loadUrl("/assets/cooltune.mod", { autoplay: true });
-  } else {
-    player.position = 0;
-    player.row = 0;
-  }
-};
-
-document.getElementById("app").innerHTML = `
-<button onclick="play()">Play</button>
-`;
+worklet.connect(context.destination);
 ```
 
 [CodeSandbox example](https://codesandbox.io/s/modplayer-example-67p37i)

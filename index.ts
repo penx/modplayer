@@ -1,4 +1,4 @@
 export * from "./Protracker";
-export * from "./loadUrl";
-export * from "./loadWorkletFromUrl";
+export * from "./loadBufferFromUrl";
+export * from "./loadWorkletFromBuffer";
 export * from "./ModWorkletNode";

@@ -19,3 +19,6 @@
 /loadWorkletFromUrl.js
 /ModWorkletNode.js
 /ModWorkletProcessor.js
+/loadBufferFromUrl.js
+/loadWorkletFromBuffer.js
+/worklet.js

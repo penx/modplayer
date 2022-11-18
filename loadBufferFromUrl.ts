@@ -1,21 +1,6 @@
-import { ModWorkletNode } from "./ModWorkletNode";
-
 const supportedformats = ["mod", "s3m", "xm"];
 
-export const loadWorkletFromUrl = async (
-  url: string,
-  context: AudioContext,
-  {
-    options,
-    workletName = "ModWorkletProcessor",
-  }: {
-    options?: {
-      autoplay?: boolean;
-      repeat?: boolean;
-    };
-    workletName?: string;
-  }
-) => {
+export const loadBufferFromUrl = async (url: string) => {
   let ext = url.split(".").pop()?.toLowerCase().trim();
   if (!ext || supportedformats.indexOf(ext) == -1) {
     // unknown extension, maybe amiga-style prefix?
@@ -31,14 +16,5 @@ export const loadWorkletFromUrl = async (
     throw new Error(`HTTP error, status = ${response.status}`);
   }
   const buffer = new Uint8Array(await response.arrayBuffer());
-
-  return new ModWorkletNode(context, workletName, {
-    numberOfOutputs: 1,
-    outputChannelCount: [2],
-    processorOptions: {
-      ext,
-      buffer,
-      options,
-    },
-  });
+  return { buffer, ext };
 };
